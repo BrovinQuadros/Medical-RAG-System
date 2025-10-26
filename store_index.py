@@ -8,11 +8,14 @@ from langchain_pinecone import PineconeVectorStore
 load_dotenv()
 
 
-PINECONE_API_KEY=os.environ.get('PINECONE_API_KEY')
-OPENAI_API_KEY=os.environ.get('OPENAI_API_KEY')
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY") # <<< Corrected this line
 
-os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+# --- Optional: Check if keys were loaded ---
+if not PINECONE_API_KEY:
+    print("⚠️ Warning: PINECONE_API_KEY not found in environment.")
+if not NVIDIA_API_KEY:
+    print("⚠️ Warning: NVIDIA_API_KEY not found in environment.")
 
 
 extracted_data=load_pdf_file(data='data/')
